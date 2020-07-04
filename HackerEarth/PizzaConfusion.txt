@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+bool comp(pair<string,int> a,pair<string,int> b)
+{
+    if(a.second > b.second) return true;
+    else if(a.second == b.second) return (a.first < b.first);
+    return false;
+}
+
+int main()
+{
+    int n; cin >> n;
+    vector<pair<string,int>> a;
+    for(int i=0;i<n;i++)
+    {
+        string s;cin >> s;
+        int v; cin >> v;
+        pair<string,int> p(s,v);
+        a.push_back(p);        
+    }
+    sort(a.begin(),a.end(),comp);
+    cout << a[0].first;
+    return 0;
+}
