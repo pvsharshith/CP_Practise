@@ -1,0 +1,65 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int n,k,ans = 0; cin >> n;
+    vector<int> freq;
+    for(int i=0;i<n;i++)
+    {
+        int x; cin >> x;
+        freq.push_back(x);
+    }
+    cin >> k;
+    vector<int> ks;
+    for(int i=0;i<n;i++)
+    {
+        int x; cin >> x;
+        ks.push_back(x);
+    }
+    int mx;
+    for(int i=0;i<n;i++)
+    {
+        mx = i;
+        for(int j = i+1;j<n;j++)
+        {
+            if(freq[j]>freq[mx]) mx = j;                       
+        }
+        swap(freq[mx],freq[i]);
+        
+    }
+    int kmx;
+    for(int i=0;i<k;i++)
+    {
+        kmx = i;
+        for(int j = i+1;j<k;j++)
+        {
+            if(ks[j]>ks[kmx]) kmx = j;                       
+        }
+        swap(ks[kmx],ks[i]);
+    }
+
+    int i=0,z=1;
+    while(i<n)
+    {                
+        for(int j=0;j<k;j++)
+        {
+            if(i<n && ks[j] > 0)
+            {
+                int val = freq[i] * z;
+                ans += val;
+                i++;
+                ks[j]--;
+            }
+            else break;
+        }
+        z++;
+        if(ks[0] == 0 && i != n)
+        {
+            cout << -1;
+            return 0;
+        }
+    }
+    cout << ans;    
+    return 0;
+}
